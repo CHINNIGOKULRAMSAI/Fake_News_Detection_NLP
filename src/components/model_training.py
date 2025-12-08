@@ -47,7 +47,7 @@ class ModelTrainer:
 
             models = {
                 LogisticRegression: LogisticRegression(max_iter=400, solver="saga"),
-                LinearSVC: LinearSVC(dual=False),
+                LinearSVC: LinearSVC(dual=False, class_weight="balanced"),
             }
 
             params = {

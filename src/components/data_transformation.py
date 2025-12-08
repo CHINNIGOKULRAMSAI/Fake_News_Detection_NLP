@@ -29,7 +29,13 @@ class DataTransformation:
         self.data_transformation_config = DataTransformationConfig()
         self.stopwords = set(stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
-        self.vectorizer = TfidfVectorizer(max_features=3000, ngram_range=(1,2), sublinear_tf=True)
+        self.vectorizer = self.vectorizer = TfidfVectorizer(
+            max_features=20000,
+            ngram_range=(1, 2),
+            min_df=3,
+            max_df=0.9,
+            sublinear_tf=True
+            )
     
     def _clean_text(self,text:str):
         if not isinstance(text, str):

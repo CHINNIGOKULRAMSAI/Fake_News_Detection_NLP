@@ -31,11 +31,11 @@ class DataIngestion:
             logging.info("Data ingestion is Started")
             df = pd.read_csv("data/WELFake_Dataset.csv.zip", index_col=0)
 
-            # Keep required columns and drop rows where title/text are missing
             df = df[['title', 'text', 'label']].copy()
             df.dropna(subset=['title', 'text'], inplace=True)
 
-            # Combine title and text into a single text field
+            df.drop_duplicates(subset=['text', 'label'], inplace=True)
+
             df['text'] = (df['title'].fillna('') + ' ' + df["text"].fillna(''))
 
             os.makedirs(os.path.dirname(self.data_ingestion_config.train_path),exist_ok=True)
