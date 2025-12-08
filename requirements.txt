@@ -1,0 +1,8 @@
+setuptools
+scikit-learn
+nltk
+numpy
+pandas
+matplotlib
+
+# -e .

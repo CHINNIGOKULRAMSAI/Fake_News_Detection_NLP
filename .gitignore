@@ -1,3 +1,32 @@
+# Ignore data artifacts and large generated files
+artifacts/
+artifacts/**/*.csv
+artifacts/**/*.pkl
+artifacts/**/*.json
+
+# Raw datasets
+data/**/*.csv
+data/**/*.zip
+
+# Notebooks checkpoints and temp
+**/.ipynb_checkpoints/
+*.tmp
+
+data/
+artifacts/
+*.pkl
+*.h5
+*.pt
+*.csv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
