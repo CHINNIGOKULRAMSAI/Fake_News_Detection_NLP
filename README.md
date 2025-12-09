@@ -2,6 +2,11 @@
 
 ### Real-time Fake News Classification System powered by Machine Learning, built for production deployment with FastAPI, Docker, and Azure App Service.
 
+
+👉 Live App URL:
+https://fake-news-app-gokul.azurewebsites.net
+
+
 ---
 
 ## 🚀 Tech Stack
