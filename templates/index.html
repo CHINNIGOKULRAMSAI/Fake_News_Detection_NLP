@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fake News Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Tailwind via CDN for quick professional styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+
+  <body class="bg-slate-900 text-slate-100 min-h-screen">
+    <header class="border-b border-slate-800 bg-slate-900/70 backdrop-blur">
+      <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="h-9 w-9 rounded-lg bg-emerald-600/20 border border-emerald-500/40 flex items-center justify-center">
+            <span class="text-emerald-400 text-lg">📰</span>
+          </div>
+          <h1 class="text-xl md:text-2xl font-bold">Fake News Detection</h1>
+        </div>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-300">
+          <a class="hover:text-slate-100" href="/health">Health</a>
+          <a class="hover:text-slate-100" href="#about">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-8">
+      <section class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/70 rounded-2xl border border-slate-700 shadow-xl">
+          <div class="p-6">
+            <h2 class="text-lg font-semibold mb-2">Analyze a News Text</h2>
+            <p class="text-slate-300 mb-4">Paste a headline or article. The model predicts <span class="text-emerald-400 font-medium">REAL</span> or <span class="text-rose-400 font-medium">FAKE</span>.</p>
+            <label for="news_text" class="block text-sm font-medium text-slate-200 mb-2">News text</label>
+            <textarea id="news_text" class="w-full h-40 rounded-xl bg-slate-900/80 border border-slate-700 px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="Example: Breaking: Government announces free internet for all citizens starting next week..."></textarea>
+            <div class="mt-3 flex flex-wrap gap-3">
+              <button id="predict_btn" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-sm font-semibold text-white transition-all shadow-md hover:shadow-lg">🔍 Analyze News</button>
+              <button id="fill_real" class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-900/50 text-slate-200 hover:bg-slate-800">Try REAL</button>
+              <button id="fill_fake" class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-900/50 text-slate-200 hover:bg-slate-800">Try FAKE</button>
+            </div>
+            <div id="loading" class="mt-4 hidden text-sm text-slate-300">Processing... please wait.</div>
+          </div>
+        </div>
+
+        <div class="bg-slate-800/70 rounded-2xl border border-slate-700 shadow-xl">
+          <div class="p-6">
+            <h2 class="text-lg font-semibold mb-2">Result</h2>
+            <div id="result_container" class="hidden">
+              <div id="result_box" class="rounded-xl border px-4 py-3 text-sm md:text-base font-semibold"></div>
+              <div id="explain_box" class="mt-3 text-xs text-slate-400">Model output reflects learned patterns; not a fact-check.</div>
+            </div>
+            <div id="empty_state" class="text-slate-400 text-sm">Enter text and click Analyze to see the prediction.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="mt-10 bg-slate-800/50 rounded-2xl border border-slate-700 p-6">
+        <h3 class="text-base font-semibold mb-2">About</h3>
+        <p class="text-slate-300 text-sm">This demo uses an NLP model trained on the WELFake dataset. It classifies input text as REAL or FAKE based on learned patterns. Confidence is approximate and may not be available for all model types.</p>
+      </section>
+    </main>
+
+    <script>
+      const predictBtn = document.getElementById("predict_btn");
+      const fillRealBtn = document.getElementById("fill_real");
+      const fillFakeBtn = document.getElementById("fill_fake");
+      const newsTextEl = document.getElementById("news_text");
+      const loadingEl = document.getElementById("loading");
+      const resultContainer = document.getElementById("result_container");
+      const resultBox = document.getElementById("result_box");
+      const emptyState = document.getElementById("empty_state");
+
+      async function predictFakeNews() {
+        const text = newsTextEl.value.trim();
+
+        if (!text) {
+          alert("Please enter some news text.");
+          return;
+        }
+
+        loadingEl.classList.remove("hidden");
+        resultContainer.classList.add("hidden");
+
+        try {
+          const response = await fetch("/predict", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text }),
+          });
+
+          const data = await response.json();
+              console.log('API response:', data);
+          let label = data.label || "Unknown";
+          let confidence = typeof data.confidence === 'number' ? data.confidence : null;
+              let errorMsg = typeof data.error === 'string' ? data.error : null;
+          let colorClasses =
+            label === "FAKE NEWS"
+              ? "border-rose-500 bg-rose-500/10 text-rose-300"
+              : "border-emerald-500 bg-emerald-500/10 text-emerald-300";
+
+          resultBox.className =
+            "rounded-xl border px-4 py-3 text-sm md:text-base font-semibold " +
+            colorClasses;
+          if (errorMsg) {
+            resultBox.textContent = `${label}  •  ${errorMsg}`;
+          } else if (confidence !== null) {
+            const pct = Math.round(confidence * 100);
+            resultBox.textContent = `${label}  •  Confidence: ${pct}%`;
+          } else {
+            resultBox.textContent = label;
+          }
+
+          resultContainer.classList.remove("hidden");
+          emptyState.classList.add("hidden");
+        } catch (error) {
+          console.error(error);
+          alert("Error while calling the API. Check console for details.");
+        } finally {
+          loadingEl.classList.add("hidden");
+        }
+      }
+
+      predictBtn.addEventListener("click", predictFakeNews);
+      fillRealBtn.addEventListener("click", () => {
+        newsTextEl.value = "Scientists confirm new exoplanet discovery using James Webb Telescope.";
+      });
+      fillFakeBtn.addEventListener("click", () => {
+        newsTextEl.value = "Government to deposit $5,000 in every citizen’s bank account tomorrow.";
+      });
+    </script>
+  </body>
+</html>

@@ -1,7 +1,5 @@
 import os
 import sys
-import pandas as pd
-import numpy as np
 
 from src.exception import CustomException
 from src.logger import logging
@@ -12,11 +10,9 @@ from scipy.sparse import issparse
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report, confusion_matrix, balanced_accuracy_score
 
-
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC, LinearSVC
-from sklearn.ensemble import RandomForestClassifier
-from xgboost import XGBClassifier
+
 
 @dataclass
 class ModelTrainerConfig:
@@ -46,17 +42,17 @@ class ModelTrainer:
                 y_test = test_arr[:, -1]
 
             models = {
-                LogisticRegression: LogisticRegression(max_iter=400, solver="saga"),
-                LinearSVC: LinearSVC(dual=False, class_weight="balanced"),
+                "LogisticRegression": LogisticRegression(max_iter=400, solver="saga"),
+                "LinearSVC": LinearSVC(dual=False, class_weight="balanced"),
             }
 
             params = {
-                LogisticRegression: {
+                "LogisticRegression": {
                     "penalty": ["l1", "l2"],
                     "C": [0.25, 0.5, 1, 2, 4],
                     "class_weight": [None, "balanced"],
                 },
-                LinearSVC: {
+                "LinearSVC": {
                     "C": [0.25, 0.5, 1, 2, 4],
                 },
             }
@@ -72,25 +68,26 @@ class ModelTrainer:
 
             if best_model_score < 0.6:
                 raise CustomException("No best model found")
+            
             logging.info(f"Best found model on both training and testing dataset")
-            save_object(
-                file_path=self.model_trainer_config.model_file_path,
-                obj=best_model
-                )
-
             logging.info(f"best model name is {best_model_name} and its score is {best_model_score}")
 
             best_model.fit(X_train,y_train)
             y_pred = best_model.predict(X_test)
             acc = accuracy_score(y_test,y_pred)
 
-            print(best_model)
-            print("Accuracy score {:.4f}".format(acc))
-            print("Confusion matrix:\n", confusion_matrix(y_test, y_pred))
-            print("Classification report:\n", classification_report(y_test, y_pred))
-            print("Balanced accuracy:", balanced_accuracy_score(y_test, y_pred))
+            save_object(
+                file_path=self.model_trainer_config.model_file_path,
+                obj=best_model
+                )
 
-            return acc
+            logging.info(best_model)
+            logging.info("Accuracy score {:.4f}".format(acc))
+            logging.info("Confusion matrix:\n", confusion_matrix(y_test, y_pred))
+            logging.info("Classification report:\n", classification_report(y_test, y_pred))
+            logging.info("Balanced accuracy:", balanced_accuracy_score(y_test, y_pred))
+
+            return acc,
         
         except Exception as e:
             raise CustomException(e,sys)

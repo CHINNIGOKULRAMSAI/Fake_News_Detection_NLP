@@ -53,14 +53,22 @@ def evaluate_models(X_train, X_test, y_train, y_test, models, params):
             train_nor_acc = accuracy_score(y_train, y_train_pred)
             test_nor_acc = accuracy_score(y_test, y_test_pred)
 
-            print(f"{model_name} train balanced_accuracy: {train_bal_acc:.4f}")
-            print(f"{model_name} test balanced_accuracy:  {test_bal_acc:.4f}")
-            print(f"{model_name} train normal accuracy_score: {train_nor_acc:.4f}")
-            print(f"{model_name} test normal accuracy_score:  {test_nor_acc:.4f}")
+            logging.info(f"{model_name} train balanced_accuracy: {train_bal_acc:.4f}")
+            logging.info(f"{model_name} test balanced_accuracy:  {test_bal_acc:.4f}")
+            logging.info(f"{model_name} train normal accuracy_score: {train_nor_acc:.4f}")
+            logging.info(f"{model_name} test normal accuracy_score:  {test_nor_acc:.4f}")
 
             report[model_name] = test_bal_acc
 
         return report
 
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return pickle.load(file_obj)
+ 
     except Exception as e:
         raise CustomException(e, sys)

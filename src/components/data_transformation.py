@@ -29,7 +29,7 @@ class DataTransformation:
         self.data_transformation_config = DataTransformationConfig()
         self.stopwords = set(stopwords.words('english'))
         self.lemmatizer = WordNetLemmatizer()
-        self.vectorizer = self.vectorizer = TfidfVectorizer(
+        self.vectorizer = TfidfVectorizer(
             max_features=20000,
             ngram_range=(1, 2),
             min_df=3,

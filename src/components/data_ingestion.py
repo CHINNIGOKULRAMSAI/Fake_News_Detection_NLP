@@ -6,14 +6,7 @@ from dataclasses import dataclass
 
 from src.exception import CustomException
 from src.logger import logging
-
 from sklearn.model_selection import train_test_split
-
-from src.components.data_transformation import DataTransformation
-from src.components.data_transformation import DataTransformationConfig
-
-from src.components.model_training import ModelTrainer
-from src.components.model_training import ModelTrainerConfig
 
 
 @dataclass
@@ -55,13 +48,3 @@ class DataIngestion:
         except Exception as e:
             raise CustomException(e,sys)
         
-
-if __name__ == '__main__':
-    DataIngestion = DataIngestion()
-    train_path, test_path = DataIngestion.initiate_data_ingestion()
-
-    DataTransformation = DataTransformation()
-    train_arr, test_arr = DataTransformation.initiate_data_transformation(train_path, test_path)
-
-    ModelTrainer = ModelTrainer()
-    ModelTrainer.initiate_model_trainer(train_arr, test_arr)
