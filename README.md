@@ -1,105 +1,176 @@
-# 📰 Fake News Detection — NLP · FastAPI · Docker · Azure
+# 🚀 **FAKE NEWS DETECTION — NLP + FASTAPI + DOCKER + AZURE**
 
-### Real-time Fake News Classification System powered by Machine Learning, built for production deployment with FastAPI, Docker, and Azure App Service.
+### *A Production-Ready Fake News Classifier deployed with Azure App Service*
 
-
-👉 Live App URL:
-https://fake-news-app-gokul.azurewebsites.net
-
-
----
-
-## 🚀 Tech Stack
-
-**ML / NLP**: scikit-learn · TF-IDF
-**Backend**: FastAPI · Uvicorn
-**Deployment**: Docker · Azure Container Registry · Azure App Service
-**UI**: HTML · TailwindCSS
+<p align="center">
+  <img src="https://img.shields.io/badge/Framework-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Container-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Cloud-Azure-0089D6?style=for-the-badge&logo=microsoftazure&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Language-Python_3.10-blue?style=for-the-badge&logo=python"/>
+  <img src="https://img.shields.io/badge/Model-ML_NLP-success?style=for-the-badge"/>
+</p>
 
 ---
 
-## ✨ Features
+## 📌 **Live Demo**
 
-* 🔎 **Real-time Fake/Real news prediction**
-* 🧹 **End-to-end NLP pipeline** (cleaning, tokenizing, vectorizing)
-* ⚙️ **Modular ML workflow** (training + prediction pipelines)
-* 🌐 **FastAPI REST API** with health & prediction endpoints
-* 🐳 **Dockerized application** for easy deployment
-* ☁️ **Hosted on Azure App Service** using ACR images
-* 🎨 **Modern web UI** with “Try REAL” and “Try FAKE” examples
+### 🔹 **Frontend Web App:**
+
+👉 [https://fake-news-app-gokul.azurewebsites.net](https://fake-news-app-gokul.azurewebsites.net)
+
+### 🔹 **API Documentation (Swagger UI):**
+
+👉 [https://fake-news-app-gokul.azurewebsites.net/docs](https://fake-news-app-gokul.azurewebsites.net/docs)
 
 ---
 
-## 📁 Project Structure
+# ✨ Overview
+
+This project is a **real-time Fake News Detection System** built using:
+
+* **NLP preprocessing**
+* **TF-IDF vectorization**
+* **Logistic Regression classifier**
+* **FastAPI backend**
+* **Docker containerization**
+* **Azure Container Registry (ACR)**
+* **Azure App Service deployment**
+
+The app classifies news text as:
+
+✅ **REAL NEWS**
+❌ **FAKE NEWS**
+
+It also provides a **confidence score** and comes with a modern, responsive, Tailwind CSS-powered UI.
+
+---
+
+# 🖼️ Screenshots
+
+### 🔹 Home Page
+
+<img src="your-screenshot-1-url" width="700">
+
+### 🔹 Prediction Example
+
+<img src="your-screenshot-2-url" width="700">
+
+### 🔹 Swagger API Docs
+
+<img src="your-screenshot-3-url" width="700">
+
+> Replace the URLs above with GitHub image links after uploading screenshots.
+
+---
+
+# 🧠 Features
+
+### 🌟 **Core Capabilities**
+
+* Real-time fake news classification
+* Confidence score generation
+* Clean UI with Tailwind CSS
+* REST API built using FastAPI
+* Model + vectorizer loading via pickle
+* Robust preprocessing (stopwords, lemmatization)
+
+### 🌐 **Cloud & DevOps**
+
+* Dockerized ML application
+* Secure ACR container hosting
+* Deployed using Azure App Service (Linux)
+* Built-in health endpoint `/health`
+* Swagger docs auto-generated at `/docs`
+
+---
+
+# 🏗️ System Architecture
 
 ```
-project/
-│── src/
-│   ├── components/          # ingestion, transformation, training modules
-│   ├── pipeline/            # train & predict pipelines
-│   ├── utils.py
-│   ├── logger.py
-│   ├── exception.py
-│
-│── artifacts/               # model, vectorizer, processed data
-│── main.py                  # FastAPI application
-│── index.html               # Frontend UI
-│── Dockerfile
-│── requirements.txt
-│── README.md
+               ┌────────────────────────┐
+               │      User Browser      │
+               │  (Tailwind Frontend)   │
+               └────────────┬───────────┘
+                            │
+                            ▼
+               ┌────────────────────────┐
+               │       FastAPI API      │
+               │   /predict /health     │
+               └────────────┬───────────┘
+                            │
+                            ▼
+               ┌────────────────────────┐
+               │    ML Model (TF-IDF +  │
+               │ Logistic Regression )   │
+               └────────────┬───────────┘
+                            │
+                            ▼
+               ┌────────────────────────┐
+               │   Docker Container     │
+               └────────────┬───────────┘
+                            │
+                            ▼
+               ┌────────────────────────┐
+               │ Azure Container Registry│
+               └────────────┬───────────┘
+                            │
+                            ▼
+               ┌────────────────────────┐
+               │ Azure App Service       │
+               └─────────────────────────┘
 ```
 
 ---
 
-## 🧪 API Endpoints
+# 🔧 Tech Stack
 
-### Health Check
-
-`GET /health`
-
-### Predict Fake/Real
-
-`POST /predict`
-
-```json
-{
-  "text": "Your news article here..."
-}
-```
+| Layer                | Technology                                  |
+| -------------------- | ------------------------------------------- |
+| **Frontend**         | HTML, Tailwind CSS, JavaScript              |
+| **Backend API**      | FastAPI                                     |
+| **ML Model**         | Scikit-learn (TF-IDF + Logistic Regression) |
+| **Containerization** | Docker                                      |
+| **Cloud Deployment** | Azure ACR + Azure App Service               |
+| **Monitoring**       | Azure Log Stream                            |
 
 ---
 
-## 🖥️ Running Locally
+# 🚀 Local Development
 
-### Install
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/CHINNIGOKULRAMSAI/Fake_News_Detection_NLP.git
+cd Fake_News_Detection_NLP
+```
+
+### 2️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Start App
+### 3️⃣ Run FastAPI App
 
 ```bash
-uvicorn main:app --reload
+uvicorn main:app --reload --port 8000
 ```
 
-UI available at:
-
-```
-http://localhost:8000
-```
+Now open:
+👉 `http://127.0.0.1:8000` (Frontend)
+👉 `http://127.0.0.1:8000/docs` (Swagger)
 
 ---
 
-## 🐳 Docker
+# 🐳 Docker Setup
 
-### Build
+### Build Image
 
 ```bash
 docker build -t fake-news-api:v1 .
 ```
 
-### Run
+### Run Container Locally
 
 ```bash
 docker run -p 8000:8000 fake-news-api:v1
@@ -107,61 +178,80 @@ docker run -p 8000:8000 fake-news-api:v1
 
 ---
 
-## ☁️ Azure Deployment (Container-Based)
+# ☁️ Azure Deployment (Production)
+
+### Login to Azure
+
+```bash
+az login
+```
 
 ### Push Image to ACR
 
 ```bash
-docker tag fake-news-api:v1 <ACR_NAME>.azurecr.io/fake-news-api:v1
-docker push <ACR_NAME>.azurecr.io/fake-news-api:v1
+docker tag fake-news-api:v1 fakenewsacr98765.azurecr.io/fake-news-api:v1
+docker push fakenewsacr98765.azurecr.io/fake-news-api:v1
 ```
 
-### Configure Web App
+### Configure Web App to Pull Image
 
 ```bash
 az webapp config container set \
-  --name <WEBAPP_NAME> \
-  --resource-group <RG_NAME> \
-  --container-image-name <ACR_NAME>.azurecr.io/fake-news-api:v1 \
-  --container-registry-url https://<ACR_NAME>.azurecr.io \
-  --container-registry-user <USER> \
-  --container-registry-password "<PASSWORD>"
+  --name fake-news-app-gokul \
+  --resource-group fake-news-rg \
+  --container-image-name fakenewsacr98765.azurecr.io/fake-news-api:v1 \
+  --container-registry-url https://fakenewsacr98765.azurecr.io \
+  --container-registry-user fakenewsacr98765 \
+  --container-registry-password "YOUR_PASSWORD"
 ```
 
 ### Set App Port
 
 ```bash
-az webapp config appsettings set \
-  --resource-group <RG_NAME> \
-  --name <WEBAPP_NAME> \
-  --settings WEBSITES_PORT=8000
+az webapp config appsettings set --name fake-news-app-gokul --resource-group fake-news-rg --settings WEBSITES_PORT=8000
 ```
 
 ---
 
-## 🎨 UI Preview
+# 📡 API Endpoints
 
-The frontend includes:
-
-* Clean TailwindCSS interface
-* Input box for article text
-* Real-time prediction display
-* Auto-filled example articles (Real / Fake)
-
----
-
-## 📌 Highlights
-
-* Fully production-ready design
-* Easy CI/CD integration
-* Cloud-native architecture
-* Perfect for portfolio + resume + interviews
-* Real-world MLOps project structure
+| Method   | Endpoint   | Description            |
+| -------- | ---------- | ---------------------- |
+| **GET**  | `/`        | Returns frontend UI    |
+| **GET**  | `/health`  | Health check           |
+| **POST** | `/predict` | Predict fake/real news |
+| **GET**  | `/docs`    | Swagger UI             |
 
 ---
 
-## 📜 License
+# 📂 Project Structure
 
-MIT License.
+```
+Fake_News_Detection_NLP/
+│── data/
+│── models/
+│── static/
+│── templates/
+│── main.py
+│── requirements.txt
+│── Dockerfile
+│── README.md
+```
+
+---
+
+# ❤️ Credits
+
+* Dataset: **WELFake**
+* ML Framework: **Scikit-Learn**
+* Deployment: **Microsoft Azure**
+
+---
+
+# ⭐ Support the Project
+
+If you like this project, give it a ⭐ on GitHub!
+
+👉 [https://github.com/CHINNIGOKULRAMSAI](https://github.com/CHINNIGOKULRAMSAI)
 
 ---
