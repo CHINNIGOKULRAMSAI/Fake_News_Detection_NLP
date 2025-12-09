@@ -1,0 +1,57 @@
+🟥 FAKE NEWS EXAMPLES (fabricated, exaggerated, impossible)
+Fake News Example 1
+
+“Researchers at Stanford University have reportedly developed a pill that can temporarily increase human memory capacity by 300%. The pill, called NeuroX, is expected to be released to the public early next year, pending final approval. Officials claim it could revolutionize education and the workplace, but critics warn of potential misuse.”
+
+Fake News Example 2
+
+Facebook is reportedly testing a feature that allows users to communicate using brainwave-based messages, eliminating the need for keyboards or touchscreens.
+
+Fake News Example 3
+
+An online publication reported that the national space agency lost contact with a prototype satellite carrying classified surveillance equipment. The publication claims the satellite may have drifted toward foreign airspace. Space officials deny any equipment loss, calling the report “fabricated and irresponsible.”
+
+Fake News Example 4
+
+“New smartphone update allows users to charge their battery using sunlight through the screen.”
+
+Fake News Example 5
+
+“Researchers discover that humans can survive without sleeping if they listen to a specific frequency of sound.”
+
+Fake News Example 6
+
+“A mysterious island appeared overnight in the Pacific Ocean, and residents say it was created by aliens.”
+
+Fake News Example 7
+
+“Government announces that from next month, WiFi will be completely free for all citizens nationwide.”
+
+🟩 REAL NEWS EXAMPLES (credible, factual, typical headlines)
+Real News Example 1
+
+“The World Health Organization announced a new guideline for the treatment of respiratory infections.”
+
+Real News Example 2
+
+“Apple launched its latest MacBook series with improved battery life and a new M-series processor.”
+
+Real News Example 3
+
+“Heavy rainfall caused flooding in several regions, affecting transportation and local businesses.”
+
+Real News Example 4
+
+“A major university introduced a new scholarship program for students studying climate science.”
+
+Real News Example 5
+
+“Scientists successfully tested a new malaria vaccine showing promising results in clinical trials.”
+
+Real News Example 6
+
+“The International Space Station conducted a routine resupply mission delivering scientific equipment.”
+
+Real News Example 7
+
+“Local authorities announced the construction of a new public transportation line to reduce traffic congestion.”
