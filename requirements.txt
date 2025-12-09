@@ -1,9 +1,10 @@
-scikit-learn>=1.3.0,<1.7.0nltk
+scikit-learn==1.6.1
+nltk
 numpy
 pandas
 matplotlib
 fastapi
 uvicorn
 pydantic
-
+bs4
 # -e .
